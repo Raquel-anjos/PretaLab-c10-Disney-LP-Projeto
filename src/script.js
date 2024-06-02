@@ -12,7 +12,7 @@ function jogoDeAdivinhacao() {
    if(palpiteDigitado === numeroAleatorio) {
     alert("Parabéns você acertou!")
     reiniciarJogo();
-    return
+    return;
    } else if (palpiteDigitado > numeroAleatorio) {
     tentativas++;
     atualizarFeedback("O número é muito alto. Tente novamente.")
@@ -21,7 +21,6 @@ function jogoDeAdivinhacao() {
     atualizarFeedback("O número é muito baixo. Tente novamente.")
    }
 
-
    const novaPontuacao = 100 - (tentativas * 10)
    atualizarPontuacao(novaPontuacao);
 
@@ -29,6 +28,11 @@ function jogoDeAdivinhacao() {
    const novosPalpitesFalhos = palpitesFalhos + " " + palpiteDigitado
    atualizarPalpitesFalhos(novosPalpitesFalhos);
 
+const pontuacaoAtual = pegarPontuacao();
+if (pontuacaoAtual === "Você tem 0 pontos") {
+    alert("Acabou o jogo, você perdeu!");
+    reiniciarJogo();
+}
 
 }
 
