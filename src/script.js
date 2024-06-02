@@ -17,9 +17,14 @@ function jogoDeAdivinhacao() {
     tentativas++;
     atualizarFeedback("O número é muito baixo. Tente novamente.")
    }
+
+
    const novaPontuacao = 100 - (tentativas * 10)
    atualizarPontuacao(novaPontuacao);
 
+   const palpitesFalhos = pegarPalpitesFalhos();
+   const novosPalpitesFalhos = palpitesFalhos + " " + palpiteDigitado
+   atualizarPalpitesFalhos(novosPalpitesFalhos);
 
 
 }
