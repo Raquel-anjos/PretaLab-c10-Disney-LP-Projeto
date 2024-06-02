@@ -1,15 +1,18 @@
-let numeroAleatorio = 13;
+let numeroAleatorio = Math.floor(Math.random() * 100 + 1);
 let tentativas = 0;
 
 function jogoDeAdivinhacao() {
    const palpiteDigitado = pegarPalpiteDigitado();
    
    if (!palpiteDigitado) {
-    alert("Digite um valor válido")
+    alert("Digite um valor válido");
+    return;
    }
 
    if(palpiteDigitado === numeroAleatorio) {
     alert("Parabéns você acertou!")
+    reiniciarJogo();
+    return
    } else if (palpiteDigitado > numeroAleatorio) {
     tentativas++;
     atualizarFeedback("O número é muito alto. Tente novamente.")
@@ -30,5 +33,12 @@ function jogoDeAdivinhacao() {
 }
 
 function reiniciarJogo() {
-    // to-do
+    const vaiReiniciar = confirm("Deseja jogar novamente?");
+    if (vaiReiniciar === true) {
+
+        atualizarPalpitesFalhos(" ");
+        atualizarPontuacao(100);
+        atualizarFeedback(" ");
+        limparPalpiteDigitado();
+    }
 }
