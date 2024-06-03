@@ -1,8 +1,10 @@
 let numeroAleatorio = Math.floor(Math.random() * 100 + 1);
 let tentativas = 0;
+let palpiteRepetido = []
 
 function jogoDeAdivinhacao() {
    const palpiteDigitado = pegarPalpiteDigitado();
+   
    
    
    if (!palpiteDigitado) {
@@ -10,12 +12,8 @@ function jogoDeAdivinhacao() {
     return;
    }
 
-   if(palpiteDigitado === numeroAleatorio) {
-    alert("Parabéns você acertou!")
-    reiniciarJogo();
-    return;
     
-   } else if (palpiteDigitado > 100) {
+    if (palpiteDigitado > 100) {
     alert("Palpite invalido.")
     limparPalpiteDigitado();
     limparPalpiteFalho();
@@ -23,14 +21,28 @@ function jogoDeAdivinhacao() {
     alert("Palpite invalido.")
     limparPalpiteDigitado();
     limparPalpiteFalho();
-   } else if (palpiteDigitado > numeroAleatorio) {
+   }
+
+
+   if(palpiteDigitado === numeroAleatorio) {
+    alert("Parabéns você acertou!")
+    reiniciarJogo();
+    return;
+    } else if (palpiteDigitado > numeroAleatorio) {
     tentativas++;
     atualizarFeedback("O número é muito alto. Tente novamente.")
    } else if (palpiteDigitado < numeroAleatorio) {
     tentativas++;
     atualizarFeedback("O número é muito baixo. Tente novamente.")
-   } 
-
+   }
+   // else if (palpiteRepetido.includes(palpiteDigitado)); {
+   // alert("Já houve uma tentativa com esse número. Por favor tente um número diferente");
+  //  return;
+  // }
+  // palpiteRepetido.push(palpiteDigitado);
+  
+   
+   
    const novaPontuacao = 100 - (tentativas * 10)
    atualizarPontuacao(novaPontuacao);
 
@@ -38,6 +50,9 @@ function jogoDeAdivinhacao() {
    const novosPalpitesFalhos = palpitesFalhos + " " + palpiteDigitado
    atualizarPalpitesFalhos(novosPalpitesFalhos);
 
+  
+
+   
 const pontuacaoAtual = pegarPontuacao();
 if (pontuacaoAtual === "Você tem 0 pontos") {
     alert("Acabou o jogo, você perdeu!");
@@ -54,5 +69,6 @@ function reiniciarJogo() {
         atualizarPontuacao(100);
         atualizarFeedback(" ");
         limparPalpiteDigitado();
+        palpiteRepetido = [];
     }
 }
